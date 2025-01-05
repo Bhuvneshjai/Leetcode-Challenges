@@ -2,7 +2,7 @@ class Solution:
     def reverseVowels(self, s: str) -> str:
         vowels = set("aeiouAeiou")                  # Define Vowels in Both Lower Case and Upper Case
         s_lst = list(s)                             # Convert the string to a list
-        print(f"List of {str} : {s_lst}")        # Print list
+        print(f"List of {s} : {s_lst}")        # Print list
         i,j = 0, len(s)-1                           # Initialize 2 pointers
 
         while i < j:
