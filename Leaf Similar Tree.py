@@ -34,8 +34,8 @@ class Solution:
                 leaf_values.append(node.val)
             dfs(node.left)
             dfs(node.right)
-            dfs(root)
-            return leaf_values
+        dfs(root)
+        return leaf_values
 
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
         return self.getLeafValues(root1) == self.getLeafValues(root2)
