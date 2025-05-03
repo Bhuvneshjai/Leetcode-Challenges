@@ -50,13 +50,21 @@ Output:
 '''
 
 import pandas as pd
+
+
 def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
-    unique_salary = employee['salary'].drop_duplicates().sort_values(ascending=False)
-    if len(unique_salary)>=N:
-        nth_salary = unique_salary.iloc[N-1]
-    else:
+    # Get distinct salaries in descending order
+    unique_salaries = employee['salary'].drop_duplicates().sort_values(ascending=False).reset_index(drop=True)
+
+    # Validate N
+    if N <= 0 or N > len(unique_salaries):
         nth_salary = None
-    return pd.DataFrame({f'getNthHighestSalary({N}': [nth_salary]})
+    else:
+        nth_salary = unique_salaries.iloc[N - 1]
+
+    # Return result in the expected format
+    return pd.DataFrame({f'getNthHighestSalary({N})': [nth_salary]})
+
 
 data = {
         'id': [1, 2, 3],
