@@ -50,11 +50,27 @@ import pandas as pd
 def count_unique_subjects(teacher: pd.DataFrame) -> pd.DataFrame:
     result = (
         teacher
-        .drop_duplicates(subset=['teacher_id', 'subject_id'])  # Remove duplicates across departments
+        .drop_duplicates(subset=['teacher_id', 'subject_id'])
         .groupby('teacher_id')['subject_id']
         .nunique()
         .reset_index(name='cnt')
     )
+    r1 = teacher.drop_duplicates(subset=['teacher_id','subject_id'])
+    print(r1)
+    print()
+
+    r2 = r1.groupby('teacher_id')['subject_id']
+    print(r2)
+    print()
+
+    r3 = r2.nunique()
+    print(r3)
+    print()
+
+    r4 = r3.reset_index(name='cnt')
+    print(r4)
+    print()
+
     return result
 
 import pandas as pd
