@@ -100,8 +100,16 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame,
                               examinations: pd.DataFrame) -> pd.DataFrame:
     # Step 1: Create Cartesian product
     students['key'] = 1
+    print(students)
+    print()
+
     subjects['key'] = 1
+    print(subjects)
+    print()
+
     all_combinations = pd.merge(students, subjects, on='key').drop(columns='key')
+    print(all_combinations)
+    print()
 
     # Step 2: Count exam attendance
     exam_counts = (
@@ -110,6 +118,8 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame,
         .size()
         .reset_index(name='attended_exams')  # ✅ Fixed here
     )
+    print(exam_counts)
+    print()
 
     # Step 3: Merge counts with full list
     result = pd.merge(
@@ -118,9 +128,14 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame,
         on=['student_id', 'subject_name'],
         how='left'
     )
+    print(result)
+    print()
 
     # Step 4: Fill missing values and sort
     result['attended_exams'] = result['attended_exams'].fillna(0).astype(int)
+    print(result)
+    print()
+
     result = result[['student_id', 'student_name', 'subject_name', 'attended_exams']]
     result = result.sort_values(by=['student_id', 'subject_name']).reset_index(drop=True)
 
